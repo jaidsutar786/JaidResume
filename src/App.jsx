@@ -4,6 +4,8 @@ import profilePhoto from './assets/Jaidphoto.jpg'
 import germanCertificate from './assets/german.pdf'
 import resumePdf from './assets/JAIDSUTAR.pdf'
 
+const composeEmailUrl = 'https://mail.google.com/mail/?view=cm&fs=1&to=sutarjaid970%40gmail.com&su=Project%20Inquiry'
+
 const routeTargets = {
   '/home': 'top',
   '/experience': 'experience',
@@ -123,13 +125,13 @@ function App() {
       <main id="top" className="resume-layout">
         <aside className="resume-sidebar">
           <div className="photo-box"><img src={profilePhoto} alt="Jaid Sutar" /></div>
-          <div className="sidebar-block"><p className="sidebar-label">Contact</p><a href="mailto:sutarjaid970@gmail.com"><Mail size={14} /> sutarjaid970@gmail.com</a><a href="tel:+918956063127"><Phone size={14} /> 8956063127</a><span><MapPin size={14} /> Pune, India</span><a href="https://www.linkedin.com/in/jaid-sutar-6b5601262/" target="_blank" rel="noreferrer"><ExternalLink size={14} /> LinkedIn profile</a></div>
+          <div className="sidebar-block"><p className="sidebar-label">Contact</p><a href={composeEmailUrl} target="_blank" rel="noreferrer"><Mail size={14} /> sutarjaid970@gmail.com</a><a href="tel:+918956063127"><Phone size={14} /> 8956063127</a><span><MapPin size={14} /> Pune, India</span><a href="https://www.linkedin.com/in/jaid-sutar-6b5601262/" target="_blank" rel="noreferrer"><ExternalLink size={14} /> LinkedIn profile</a></div>
           <div className="sidebar-block"><p className="sidebar-label">Core stack</p><div className="tool-list"><span>React.js</span><span>Python</span><span>Django</span><span>JavaScript</span><span>MySQL</span><span>REST APIs</span></div></div>
           <div className="sidebar-block languages"><p className="sidebar-label">Languages</p><span>English</span><span>Hindi</span><span>German</span><div className="certificate-links"><a href={germanCertificate} target="_blank" rel="noreferrer"><Eye size={13} /> View certificate</a><a href={germanCertificate} download><Download size={13} /> Download</a></div></div>
         </aside>
 
         <section className="resume-content">
-          <section className="resume-intro" id="profile"><p className="eyebrow"><i /> Full-Stack Developer | React.js | Python | Django</p><h1>Jaid <em>Sutar</em></h1><p className="intro-summary">Full-Stack Developer with professional experience building responsive web applications using React.js, JavaScript, Python, and Django. Experienced in reusable components, interactive dashboards, RESTful APIs, third-party integrations, authentication, role-based access control, and database-driven applications.</p><div className="intro-links"><a href="/contact" onClick={(event) => navigate(event, '/contact')}>+91 8956063127</a><a href="mailto:sutarjaid970@gmail.com">sutarjaid970@gmail.com</a><span>Pune</span></div></section>
+          <section className="resume-intro" id="profile"><p className="eyebrow"><i /> Full-Stack Developer | React.js | Python | Django</p><h1>Jaid <em>Sutar</em></h1><p className="intro-summary">Full-Stack Developer with professional experience building responsive web applications using React.js, JavaScript, Python, and Django. Experienced in reusable components, interactive dashboards, RESTful APIs, third-party integrations, authentication, role-based access control, and database-driven applications.</p><div className="intro-links"><a href="/contact" onClick={(event) => navigate(event, '/contact')}>+91 8956063127</a><a href={composeEmailUrl} target="_blank" rel="noreferrer">sutarjaid970@gmail.com</a><span>Pune</span></div></section>
           <section className="resume-section" id="experience"><SectionHeading number="01" title="Professional Experience" /><div className="experience-list">{experience.map((item) => <article className="experience-item" key={item.role}><time>{item.period}</time><div><h2>{item.role}</h2><p className="company">{item.company}</p><p>{item.text}</p></div></article>)}</div></section>
           <section className="resume-section" id="projects"><SectionHeading number="02" title="Projects" /><div className="project-list">{projects.map((project) => <Project key={project.title} {...project} />)}</div></section>
           <section className="resume-section" id="skills"><SectionHeading number="03" title="Technical Skills" /><div className="skills-list">{technicalSkills.map((skill) => <div className="technical-skill" key={skill.label}><h3>{skill.label}</h3><p>{skill.value}</p></div>)}</div></section>
@@ -138,10 +140,10 @@ function App() {
             <p className="eyebrow"><i /> Let&apos;s connect</p>
             <h2>Have a project in mind?</h2>
             <div className="form-actions">
-              <a className="submit-button" href="mailto:sutarjaid970@gmail.com?subject=Project%20Inquiry">
+              <a className="submit-button" href={composeEmailUrl} target="_blank" rel="noreferrer">
                 <Mail size={15} aria-hidden="true" /> Email me
               </a>
-              <a className="mail-link" href="mailto:sutarjaid970@gmail.com">sutarjaid970@gmail.com</a>
+              <a className="mail-link" href={composeEmailUrl} target="_blank" rel="noreferrer">sutarjaid970@gmail.com</a>
             </div>
           </section>
         </section>

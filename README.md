@@ -18,5 +18,6 @@ The contact endpoint sends through the Resend HTTPS API, so it works on Render F
 - `RESEND_API_KEY`
 - `RESEND_FROM_EMAIL` (an address on the verified domain, for example `Jaid Sutar <contact@example.com>`)
 - `TO_EMAIL` (the inbox that receives contact requests)
+- `FRONTEND_URL` (the Netlify site origin, for example `https://jaidsutar.netlify.app`; comma-separate additional allowed origins)
 
 The visitor's address is set as `reply_to`. Never put the Resend API key in frontend code or commit it to Git.

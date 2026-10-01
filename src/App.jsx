@@ -66,15 +66,10 @@ const technicalSkills = [
   { label: 'Tools & Cloud', value: 'Git, GitHub, Bitbucket, Postman, VS Code, Maven, AWS S3' },
 ]
 
-const blankForm = { name: '', email: '', phone: '', message: '' }
-
 function App() {
   const [darkMode, setDarkMode] = useState(() => localStorage.getItem('resume-theme') === 'dark')
   const [menuOpen, setMenuOpen] = useState(false)
   const [activeRoute, setActiveRoute] = useState(() => routeTargets[window.location.pathname] ? window.location.pathname : '/home')
-  const [contactForm, setContactForm] = useState(blankForm)
-  const [submitStatus, setSubmitStatus] = useState({ type: '', message: '' })
-  const [isSending, setIsSending] = useState(false)
 
   useEffect(() => {
     document.documentElement.classList.toggle('dark', darkMode)
@@ -116,48 +111,6 @@ function App() {
     setMenuOpen(false)
   }
 
-  function handleFormChange(event) {
-    const { name, value } = event.target
-    setContactForm((current) => ({ ...current, [name]: value }))
-  }
-
-  async function handleSubmit(event) {
-    event.preventDefault()
-    setIsSending(true)
-    setSubmitStatus({ type: '', message: '' })
-
-    try {
-      const apiBaseUrl = (import.meta.env.VITE_API_URL || '').replace(/\/$/, '')
-      const response = await fetch(`${apiBaseUrl}/api/contact`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(contactForm),
-      })
-
-      const responseText = await response.text()
-      let result = {}
-
-      if (responseText) {
-        try {
-          result = JSON.parse(responseText)
-        } catch {
-          result = { message: responseText }
-        }
-      }
-
-      if (!response.ok) {
-        throw new Error(result.message || 'Something went wrong while sending the message.')
-      }
-
-      setContactForm(blankForm)
-      setSubmitStatus({ type: 'success', message: 'Message sent successfully. You will receive it in your Gmail inbox.' })
-    } catch (error) {
-      setSubmitStatus({ type: 'error', message: error.message || 'Message failed to send. Please try again.' })
-    } finally {
-      setIsSending(false)
-    }
-  }
-
   return (
     <div className="resume-app">
       <header className="resume-header">
@@ -184,41 +137,12 @@ function App() {
           <section className="resume-contact" id="contact">
             <p className="eyebrow"><i /> Let&apos;s connect</p>
             <h2>Have a project in mind?</h2>
-
-            <form className="contact-form" onSubmit={handleSubmit}>
-              <div className="form-grid">
-                <label className="form-field">
-                  <span>Name</span>
-                  <input type="text" name="name" value={contactForm.name} onChange={handleFormChange} placeholder="Your name" required />
-                </label>
-
-                <label className="form-field">
-                  <span>Email</span>
-                  <input type="email" name="email" value={contactForm.email} onChange={handleFormChange} placeholder="you@example.com" required />
-                </label>
-
-                <label className="form-field">
-                  <span>Phone</span>
-                  <input type="tel" name="phone" value={contactForm.phone} onChange={handleFormChange} placeholder="+91 98765 43210" />
-                </label>
-
-                <label className="form-field form-field-full">
-                  <span>Project Details</span>
-                  <textarea name="message" value={contactForm.message} onChange={handleFormChange} placeholder="Tell me about your project or requirement..." rows="5" required />
-                </label>
-              </div>
-
-              <div className="form-actions">
-                <button type="submit" className="submit-button" disabled={isSending}>
-                  {isSending ? 'Sending...' : 'Send Message'}
-                </button>
-                <a className="mail-link" href="mailto:sutarjaid970@gmail.com?subject=Project%20Inquiry" target="_blank" rel="noreferrer">Email directly</a>
-              </div>
-
-              {submitStatus.message && (
-                <p className={`status-message ${submitStatus.type}`}>{submitStatus.message}</p>
-              )}
-            </form>
+            <div className="form-actions">
+              <a className="submit-button" href="mailto:sutarjaid970@gmail.com?subject=Project%20Inquiry">
+                <Mail size={15} aria-hidden="true" /> Email me
+              </a>
+              <a className="mail-link" href="mailto:sutarjaid970@gmail.com">sutarjaid970@gmail.com</a>
+            </div>
           </section>
         </section>
       </main>
